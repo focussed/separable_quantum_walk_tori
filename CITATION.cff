@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper as below."
+title: "Complete Classification of Full-State Revivals on Separable Quantum Walks on Tori"
+authors:
+  - family-names: Craig
+    given-names: Ian
+    affiliation: "Atlantic Technological University, Sligo, Ireland"
+    email: ian.craig@atu.ie
+  - family-names: McGetterick
+    given-names: Michael
+    affiliation: "University of Galway, Galway, Ireland"
+year: 2026
+type: software
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.XXXXXXX"
+    description: "Zenodo archive DOI"
+repository-code: "https://github.com/focussed/separable_quantum_walk_tori"
+license: MIT
+keywords:
+  - quantum walks
+  - full-state revivals
+  - separable coin
+  - toroidal lattice
+  - cyclotomic fields
