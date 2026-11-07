@@ -37,87 +37,98 @@
 \begin{document}
 
 \title{Complete Classification of Full State Revivals on Separable Quantum Walks on Tori}\author{Ian Craig}\email[Contact author: ]{ian.craig@atu.ie}\affiliation{Atlantic Technological University, Sligo, Ireland}\author{Michael McGetterick}\affiliation{University of Galway, Galway, Ireland}\date{\today}
-\begin{abstract}A quantum walk revives when it returns exactly to its starting
-state after some number of steps. Such intrinsic full-state
-revivals are rare, and they occur mainly on symmetric
-topologies. We determine which toroidal lattices support
-revivals, and for which coin parameters. We work with the coin
-family of Dukes, parameterised by a reflection parameter $\rho$
-and a phase $\delta$, extended separably to two dimensions. We
-prove that exactly seven cycle lengths admit a revival in one
-dimension, namely $k \in \{2, 3, 4, 5, 6, 8, 10\}$. An
-exhaustive search over the remaining cycle lengths up to
-$k = 16$ finds no revival within $N \le 60$ steps. In two
-dimensions the walk factorises as a tensor product of two
-one-dimensional walks, so a torus revives whenever both of its
-axes revive at a common period, N. This gives $28$ tori, $59$
-periods, and $18{,}174$ reduced parameter sets. We find two
-revivals that Dukes did not tabulate, at $k = 2$ and $k = 4$,
-both at $\delta = \pi/2$, $\rho = 1/2$, $N = 6$. The period
-$N = 60$ occurs on many tori, including the $2 \times 2$ and
-$5 \times 5$ tori. We record how the phase parameters
-distribute across the classification, and note that in two
-dimensions the two axes may carry unequal phases, a direct
-consequence of the tensor product. We conjecture that no
-$k \notin \{2, 3, 4, 5, 6, 8, 10\}$ admits a one-dimensional
-revival at any period, and sketch a cyclotomic-field argument
-toward a proof.
+\begin{abstract}A quantum walk revives when it returns to its exact starting state
+after some number of steps. In this paper, we verify the work of
+Dukes on 1D cycles and extend it to toroidal lattices to find and classify
+all exact revivals in the 2D case. To achieve this, we use a separable coin
+parameterised by reflection parameters $\rho_x$, $\rho_y$ and phase parameters
+$\delta_x$, $\delta_y$.
+In 2D, the separable walk factorises as a tensor
+product of two 1D walks. A torus revives when both axes revive.
+It can also revive when the two axes' phases cancel each other,
+at a period shorter than their least common multiple.
+The 2D classification contains revivals in
+$28$ tori, $59$ different periods, and $18{,}174$
+distinct parameter sets.
+On the 1D cycle, we establish within the search bound that exactly seven
+cycle lengths admit an exact revival in one dimension,
+$k \in \{2, 3, 4, 5, 6, 8, 10\}$ and verify the positive cases at the operator level.
+We run an operator-level search on a
+$1001 \times 360$ grid over $(\rho, \delta)$, for $k \le 16$ and
+$N \le 60$, and find no exact revival for the remaining cycle lengths.
+We find one correction to Dukes' 1D tables: the $k = 2$, $\rho = 1/2$,
+$\delta \in \{\pi/2, 3\pi/2\}$ exact revivals at $N = 24$
+lie in Dukes' seed family but were not tabulated, because Dukes' original
+seeding was too constrained to reach them.  We offer a
+conjecture, supported by a cyclotomic-field argument, that no cycle
+length other than $\{2, 3, 4, 5, 6, 8, 10\}$ admits an exact revival.
 
 \end{abstract}
 
 \maketitle\section{\label{sec:intro}Introduction}\par
-Periodicity is a fundamental aspect of physics and a
-clock is an essential component of most computer systems. 
-An analogous phenomenon occurs in the quantum realm, where a system can 
-return exactly to its initial state after some number of steps. This is called a full-state revival.
-Under certain conditions a discrete-time quantum walk (DTQW) can exhibit 
-periodicity whereby the position and spin of
-the walker can return to their initial values after a number of
-steps. This occurs on symmetric topologies, for specific
-coins.  Such revivals have been proposed as a resource for quantum memory 
-\cite{Chandrashekar2015} and for quantum
+Periodicity is a fundamental aspect of physics and a clock is an
+essential component of most computer systems. An analogous phenomenon
+occurs in the quantum realm: under certain conditions on symmetric
+topologies, a quantum walker returns to its initial state, both
+position and spin, after some number of steps. We call this a
+\emph{full-state revival}. Such revivals have been proposed as a
+resource for quantum memory \cite{Chandrashekar2015} and for quantum
 state routing \cite{Steinfurth2025}, as a system that returns
-periodically to a previous state can serve as a clock, a register,
-or a routing primitive.
+periodically to a previous state can serve as a clock, a register, or
+a routing primitive.
+
+Here we consider a discrete-time quantum walk (DTQW) with a separable
+four-dimensional coin. For a DTQW, $U$ is the single-step operator of
+the walk. A full-state revival at period $N$ means $U^N = I$: the
+operator is the identity, so every state returns to itself with no
+phase after $N$ steps. A related phenomenon also occurs along the
+walk: the state may return to itself up to an unobservable global
+phase, $U^N = e^{i\phi} I$ for some $\phi \neq 0$. We call this a
+\emph{projective} revival. The classification in this paper is of
+full-state revivals in the strict sense, $U^N = I$; the projective
+revivals are noted where they occur but are not the object of
+classification.
 \par
-Full-state revivals are rare. They require every eigenphase
-$\theta_j$ of the walk operator $U$ to be an exact rational
-multiple of $2\pi$, so that $\theta_j = 2\pi m_j / N$ for
-integer $m_j$ and a common period $N$. In essence, every
-eigenvalue of $U$ must be a root of unity, with a common
-power $N$ that returns the walk to its initial state.
+Full-state revivals are rare. They occur only for certain coins on
+symmetric topologies, and their spectral identity is equally special:
+for $U^N = I$ to hold, every eigenphase $\theta_j$ of the walk operator
+$U$ must be a rational multiple of $2\pi$, $\theta_j = 2\pi m_j / N$
+for integer $m_j$ and a common period $N$. In other words, the
+eigenvalues of $U$ must all be roots of unity, sharing a common power
+$N$ that returns the walk to its initial state, $U^N = I$
 \par
-Dukes \cite{Dukes2014} classified full-state revivals on 1D cycle graphs.
-Using this work as a baseline, we extend that classification to separable
-discrete-time quantum walks over 2D toroidal lattices. A separable coin
-factorises into independent 1D coins on each axis of a $k \times m$ torus,
-which yields the 2D revival set within the search bounds. Our classification
-considers the admissible cycle lengths $k, m \in \{2, 3, 4, 5, 6, 8, 10\}$
-with revival periods up to $N = 420$. The classification proceeds in three
-stages: a direct demonstration of the new revivals, an operator-level
-verification of the 1D signature set, and a tensor-product construction of
-the 2D classification.
+Dukes \cite{Dukes2014} classified full-state revivals on 1D cycle
+graphs. Building on this work, we extend the classification to
+separable DTQWs over 2D toroidal lattices. A
+separable coin factorises into independent 1D coins on each axis of a
+$k \times m$ torus. The two factors revive independently, and the
+torus walk revives when they both do. The classification covers the admissible 
+cycle lengths $k, m \in \{2, 3, 4, 5, 6, 8, 10\}$ with revival periods up
+to $N = 420$.
 \par
-Concerning 2D lattices, \v{S}tefa\v{n}\'ak et al.
-showed that $N = 2$ revivals exist, but that the general
-four-state walk admits no longer cycles \cite{Stefanak2010}.
-Dodangodage later constructed walks with longer-period revivals,
-contradicting the earlier result \cite{Dodangodage2018}.
-Independently, Jayakody demonstrated that coin operators can be
-designed to produce full-state revivals of any desired period in
-higher spatial dimensions \cite{Jayakody2018}. Our work differs
-in that we classify which intrinsic revival periods arise for a fully
-parameterised coin (based on Dukes 1D parameterisation) rather
-than constructing coins to order.
+Dukes' coin is parameterised by a real reflection parameter $\rho$
+and a phase $\delta$. The 2D coin has the corresponding
+parameters $\{\rho_x, \delta_x, \rho_y, \delta_y\}$. We report the
+classification as a set of records
+$(k, m, N, \rho_x, \delta_x, \rho_y, \delta_y)$, each record giving a
+torus, an exact revival period, and the coin parameters. The 
+classification records each distinct parameter set at its smallest
+exact revival period.
 \par
-In Dukes' framework, the coin is parameterised by a real
-reflection parameter $\rho$ and a relative phase $\delta$.
-Extending this to a 2D toroidal lattice by taking the tensor
-product of independent coins on each axis gives a four-parameter
-space $\{\rho_x, \delta_x, \rho_y, \delta_y\}$. We report the
-classification as a set of records of the form
-$(k, m, N, \rho_x, \delta_x, \rho_y, \delta_y)$, each record
-giving a torus, a revival period, and the coin parameters.
+Previous work on 2D lattices involved separable coins.   \v{S}tefa\v{n}\'ak et al.\
+\cite{Stefanak2010} stated that the four-state walk
+on a 2D lattice admits $N = 2$ revivals but no
+longer cycles within the class considered.
+Later Dodangodage \cite{Dodangodage2018} constructed walks with
+revivals of longer period and Jayakody \cite{Jayakody2018} showed that a non-separable coin can
+be designed to produce revivals of any desired period.  In that construction the period is a free
+parameter: the coin and shift are built so that the walk returns after any chosen number of steps.
+Our classification covers the separable case, where the (parameterised) coin and shift are fixed 
+to the standard forms on each axis and the period is not chosen but emerges from the walk itself.
+We consider the two results to be complementary. Jayakody answers whether a revival of any given period
+can be built. We address which revivals exist for a fixed, physically standard coin family, and how
+they are structured, with the revival structure following from the two 1D factors rather than from a
+single non-separable coin.
 \par
 The remainder of this paper is structured as follows.
 Section~\ref{sec:theory} defines the separable walk and its
@@ -199,13 +210,15 @@ parameters on each axis. In the ordered basis above, the matrix representation i
 \par
 \begin{widetext}
 \begin{equation}
-C_{k \times m} =
+\begin{gathered}
+C_{k \times m} = \\[2pt]
 \begin{pmatrix}
 \sqrt{\rho_x \rho_y} & \sqrt{\rho_x (1-\rho_y)}\, e^{i\delta_y} & \sqrt{(1-\rho_x)\rho_y}\, e^{i\delta_x} & \sqrt{(1-\rho_x)(1-\rho_y)}\, e^{i(\delta_x+\delta_y)} \\[8pt]
 \sqrt{\rho_x (1-\rho_y)}\, e^{-i\delta_y} & -\sqrt{\rho_x \rho_y} & \sqrt{(1-\rho_x)(1-\rho_y)}\, e^{i(\delta_x-\delta_y)} & -\sqrt{(1-\rho_x)\rho_y}\, e^{i\delta_x} \\[8pt]
 \sqrt{(1-\rho_x)\rho_y}\, e^{-i\delta_x} & \sqrt{(1-\rho_x)(1-\rho_y)}\, e^{-i(\delta_x-\delta_y)} & -\sqrt{\rho_x \rho_y} & -\sqrt{\rho_x (1-\rho_y)}\, e^{i\delta_y} \\[8pt]
 \sqrt{(1-\rho_x)(1-\rho_y)}\, e^{-i(\delta_x+\delta_y)} & -\sqrt{(1-\rho_x)\rho_y}\, e^{-i\delta_x} & -\sqrt{\rho_x (1-\rho_y)}\, e^{-i\delta_y} & \sqrt{\rho_x \rho_y}
 \end{pmatrix}.
+\end{gathered}
 \label{eq:full_4x4_coin_matrix}
 \end{equation}
 \end{widetext}
@@ -253,6 +266,20 @@ are independent 1D evolution operators on the $x$- and $y$-cycles.
 The factorisation isolates the spectral constraints along each axis,
 so the root-of-unity conditions that govern full-state revivals can
 be evaluated dimension-by-dimension.
+
+A torus revival requires the sum of the two axis phases to be zero. When both axes revive 
+at a common step, the sum vanishes at the LCM of the two axis periods; but two nonzero 
+phases of opposite sign can also sum to zero at a step where neither axis has revived on its 
+own, which gives a torus revival at a period shorter than the LCM of the two axis periods.
+
+\emph{Note on exact versus projective revivals.}
+
+In all cases a revival requires both the position and spin state of the walker to
+return to its initial values.  In this work we distinguish between two classes of revivals:
+a \emph{projective} revival is one in which the state returns up to an
+unobservable global phase ($U^N = e^{i\phi} I$).  An \emph{exact}
+or full-state revival is one where the state returns with no phase ($U^N = I$). 
+Here we enumerate only exact revivals. 
 \subsection{The Mechanics of a Separable Walk on a Torus}\par
 To give an example of the separable walk, we evaluate a single step
 on a $3 \times 3$ torus with $\rho_x = \rho_y = 2/3$ and
@@ -350,24 +377,22 @@ every $k \in \{2, 3, 4, 5, 6, 8, 10\}$.
 \end{theorem}
 \par
 \begin{proof}[Proof of Theorem~\ref{thm:1d-existence}]
-Existence follows from the explicit witnesses tabulated by
-Dukes and verified below. For $k \in \{2, 3, 4, 6\}$ infinite
-families of solutions are given by Dukes \cite{Dukes2014},
-\S4.2--4.4; for $k \in \{5, 8, 10\}$ Dukes provides finite sets
-of explicit triples $(\rho, \delta, N)$ in \S4.5. Every
-admissible $k$ is represented in the catalogue of
-Table~\ref{tab:1d-catalogue-exact}, which lists the complete set
-of 1D signatures. The eigenphases follow from the dispersion
-relation $\sin\theta_j = \sqrt{\rho}\sin(2\pi j/k)$;
-substituting each stated parameter set and period and checking
-that every eigenphase is a rational multiple of $\pi/N$ confirms
-the revival condition $U_k^N = e^{i\phi} I_{2k}$ directly.
+For $k \in \{2, 3, 4, 6\}$ Dukes gives families of solutions
+\cite{Dukes2014}, \S4.2--4.4; for $k \in \{5, 8, 10\}$ he gives finite
+sets of explicit triples $(\rho, \delta, N)$ in \S4.5. Each triple is
+a witness to the existence of a revival at that $k$. Substituting each
+witness into the dispersion relation
+$\sin\theta_j = \sqrt{\rho}\sin(2\pi j/k)$ and checking that every
+eigenphase is a rational multiple of $2\pi/N$ verifies
+$U_k^N = I_{2k}$ directly.
 \end{proof}
 \par
 \begin{theorem}[1D non-existence within the search bound]
 \label{thm:1d-nonexistence}
-An exhaustive search over $\rho \in (0, 1)$, $\delta \in
-[0, 2\pi)$, and revival step count $N \le \Nmax$ finds no
+An exhaustive search over a grid of $\rho \in \{j \cdot
+10^{-4} : j = 1, \ldots, 9999\}$ and $\delta/\pi$ at $1/180$
+spacing (360 base points), augmented by the Dukes-exact
+$\delta$ values, for revival step count $N \le \Nmax$, finds no
 non-trivial full-state revival for any $k \notin \{2, 3, 4,
 5, 6, 8, 10\}$ with $k \le \Kmax$. The completeness of the
 1D classification for $k \ge 17$ and $N > \Nmax$ remains
@@ -377,17 +402,18 @@ open (see Conjecture~\ref{conj:no-other-k}).
 \begin{proof}[Proof of Theorem~\ref{thm:1d-nonexistence}]
 We performed a grid search over the parameter space
 $\rho \in \{j \cdot 10^{-4} : j = 1, \ldots, 9999\}$,
-$\delta/\pi$ on twenty rational values, and $N \in \{1,
+$\delta/\pi$ at $1/180$ spacing (360 base points) augmented by
+the Dukes-exact $\delta$ values, and $N \in \{1,
 \ldots, \Nmax\}$, for each $k \in \{2, \ldots, \Kmax\}$.
-For every candidate we evaluated the root-of-unity residual
+For every candidate, we evaluated the root-of-unity residual
 $r_N(\rho, \delta) = \max_j |\theta_j - m_j \cdot 2\pi/N|$.
 Grid points with residual below $10^{-3}$ were refined by
 bounded scalar minimisation followed by a local sweep, and
 accepted only if the residual after refinement fell below
 $10^{-10}$ and the independent matrix-exponentiation check
 $\|U_k^N - I_{2k}\| < 10^{-10}$ also passed. The search
-found no revival for any $k \in \{7, 9, 11, 12, 16\}$.
-The search is reproducible from the scripts in the
+found no revival for any $k \in \{7, 9, 11, 12, 13, 14, 15, 16\}$.
+The search is reproducible from the EXP032b notebook in the
 accompanying repository \cite{full_revivals_references}.
 \end{proof}
 \par
@@ -425,7 +451,7 @@ full-state revival at step $N$. By the factorisation
 $U_{k \times m} = U_k \otimes U_m$, this is equivalent
 to $U_k^N = e^{i\phi_x} I_{2k}$ and $U_m^N = e^{i\phi_y}
 I_{2m}$ simultaneously. By Theorem~\ref{thm:1d-nonexistence},
-no such $N$ exists when $k \notin \{2, 3, 4, 5, 6, 8, 10\}$
+no such $N \le \Nmax$  exists when $k \notin \{2, 3, 4, 5, 6, 8, 10\}$
 and $k \le \Kmax$; the same holds for $m$. If both $k$
 and $m$ are admissible but $\mathcal{N}_k \cap
 \mathcal{N}_m = \emptyset$, no common step count exists.
@@ -438,7 +464,7 @@ non-trivial 1D full-state revival at any period $N$ or any coin
 parameter $\rho \in (0, 1)$.
 \end{conjecture}
 
-\begin{proof}[Sketch]
+\begin{remark}[Evidence for Conjecture~\ref{conj:no-other-k}]
 The dispersion relation for a $k$-cycle is
 $\sin\theta_j = \sqrt{\rho}\,\sin(2\pi j/k)$ for
 $j = 1, \ldots, k-1$. A revival at period $N$ forces each
@@ -460,14 +486,14 @@ only one spatial harmonic ($j = 1$), and the revival condition
 is trivially solvable by choice of $\rho$.
 
 For $k \ge 3$ the constant $2\cos(2\pi/k)$ generates the real
-cyclotomic subfield $\mathbb{Q}(\cos(2\pi/k))$, whose degree
-over $\mathbb{Q}$ is $\phi(k)/2$ \cite{Washington1997}. The
-degree of this field therefore controls whether a single real
-parameter $\rho$ can synchronise the harmonics. When
-$\phi(k)/2 \le 2$---that is, $k \in \{3, 4, 5, 6, 8, 10\}$---the
-constant is rational or quadratic, and $\rho$ has enough freedom
-to satisfy the revival condition; non-trivial solutions exist
-for each of these $k$.
+cyclotomic subfield $\mathbb{Q}(\cos(2\pi/k))$, whose degree over
+$\mathbb{Q}$ is $\phi(k)/2$, where $\phi$ is Euler's totient
+function \cite{Washington1997}. The degree of this field
+therefore controls whether a single real parameter $\rho$ can
+synchronise the harmonics. For $k \in \{3, 4, 5, 6, 8, 10\}$ 
+the degree is at most two, and
+the constant is rational or quadratic; for $k = 12$ it is two; for
+$k \in \{7, 9\}$ and $k \ge 11$ it is at least three.
 
 The case $k = 12$ also has $\phi(12)/2 = 2$, but the cycle
 carries three non-trivial harmonics ($j = 1, 2, 3$). The third
@@ -489,109 +515,117 @@ dispersion relations would map the trigonometric algebraic
 integers to their Galois conjugates, generating at least three
 independent constraints on the single parameter $\rho$. Whether
 these constraints are in fact independent is the open step. If
-they are, the system admits only the boundary solutions
+they are, the system revives at only the trivial, boundary solutions
 $\rho \in \{0, 1\}$.
 
 We therefore state the conclusion as a conjecture, supported on
 the search bound of Theorem~\ref{thm:1d-nonexistence} and
 consistent with the explicit witnesses of
 Theorem~\ref{thm:1d-existence}.
-\end{proof}
+\end{remark}
 \section{\label{sec:method}Methodology}\par
-The classification is built and verified in a single notebook,
-\texttt{EXP033.ipynb}, available in the accompanying repository
-\cite{full_revivals_references}. The notebook proceeds in three
-stages: a direct demonstration of the new revivals, an operator-level
-verification of the 1D signature set, and a tensor-product
-construction of the 2D classification. The construction stage includes
-a reduction pass that collapses harmonic duplicates, recording each
-distinct parameter set once at its smallest revival period. All code,
-data, and result files are produced by the notebook and packaged as a
-single archive at the end.
+The classification is built and verified in two notebooks,
+\texttt{EXP033.ipynb} and \texttt{EXP032b.ipynb}, available in the
+accompanying repository \cite{full_revivals_references}. The method
+proceeds in four stages.
 
-\emph{Direct demonstration.} We evolve the walk step by step and
-record the fidelity of the state against its initial value,
-\begin{equation}
-F(N) = |\langle \psi_0 | \psi_N \rangle|^2 .
-\label{eq:fidelity}
-\end{equation}
-For the two new revivals --- $k = 2$ and $k = 4$, both at
-$\delta = \pi/2$, $\rho = 1/2$ --- the fidelity is zero at odd
-steps and reaches exactly $1$ at $N = 6$ and at every multiple
-of six. As controls we reproduce two revivals from Dukes'
-tables, at $k = 4$, $\rho = 3/4$, $\delta = 0$ (period 6) and
-$k = 3$, $\rho = 2/3$, $\delta = 0$ (period 8), and confirm the
-tabulated periods. The operator residual
-$\|U^N - e^{i\phi}I\|$ at these revivals is of order $10^{-15}$
-in every case.
+\emph{Revival demonstration (EXP033).} We evolve the walk step by step for
+$k = 4$, $\rho = 1/2$, $\delta = \pi/2$ and record the state at each
+step. The walker returns to its initial position and spin at
+$N \in \{6,12,18,24\}$; these four revivals carry different global
+phases, three projective and one exact. This demonstrates the
+distinction between the two criteria on a single worked example.
 
-\emph{1D revival verification.} We transcribe the complete set
-of 1D revival solutions tabulated by Dukes for cycle lengths
-$k \in \{2, 3, 4, 5, 6, 8, 10\}$, up to period $N = 30$ for
-$k \in \{2, 3, 4, 6\}$ and $N = 60$ for $k \in \{5, 8, 10\}$,
-giving 174 quadruples $(k, \rho, \delta, N)$. We verify each at
-the operator level using the eigenvalue residual
+\emph{1D verification (EXP033).} We transcribe the complete set of 1D revival
+solutions tabulated by Dukes for cycle lengths
+$k \in \{2, 3, 4, 5, 6, 8, 10\}$, together with the $k = 2$,
+$\rho = 1/2$, $\delta \in \{\pi/2, 3\pi/2\}$ correction, and verify
+each entry at the operator level using the eigenvalue residual
 \begin{equation}
 r(k, \rho, \delta, N)
 = \max_j \left| \lambda_j^N - \overline{\lambda^N} \right| ,
 \label{eq:eig-residual}
 \end{equation}
 where $\lambda_j$ are the eigenvalues of $U_k(\rho, \delta)$ and
-$\overline{\lambda^N}$ is their $N$-th power average. The
-residual vanishes exactly when all eigenvalues share a common
-$N$-th root of unity, which is the exact revival condition. All
-174 entries pass with $r < 10^{-6}$; the worst residual in the
-set is $2.3 \times 10^{-13}$, at $k = 10$,
-$\rho = (5 - \sqrt{5})/10$, $\delta = 6\pi/5$, $N = 60$.
+$\overline{\lambda^N}$ is their $N$-th power mean. The residual
+vanishes when $U^N = e^{i\phi} I$; the exact case $U^N = I$ is
+confirmed separately by a matrix-power check at the recorded period.
 
-We use the eigenvalue formulation rather than the equivalent
-matrix-power test because the latter accumulates floating-point
-error at large $N$. The 1D catalogue includes the two new
-revivals at $k = 2$ and $k = 4$, both at $\delta = \pi/2$,
-$\rho = 1/2$, $N = 6$, which are not present in Dukes'
-tabulation.
+\emph{Exhaustive grid search (EXP032b).} We search for exact
+revivals on 1D cycles for $k \le 16$ on a $1001 \times 360$
+grid over $(\rho, \delta/\pi)$, with $\rho$ at $10^{-3}$
+spacing and $\delta/\pi$ at $1/180$ spacing, augmented by the
+Dukes-exact $\delta$ values, and test $U^N = I$ up to $N = 60$
+at each grid point. The operator is diagonalised once per grid
+point, and the eigenvalue residual $\max_j |\lambda_j^N - 1|$
+is evaluated for every $N$. Grid points that pass the tolerance
+are recorded as \emph{candidate revivals}. Each candidate is
+then refined: its parameters are snapped to the nearest
+algebraic value, Snapping moves the point by at most $10^{-3}$ in $\rho$ and
+$10^{-3}$ in $\delta/\pi$, and the snapped point must then pass
+a stricter check than the detection threshold: $10^{-12}$ on the
+eigenvalue residual and $10^{-10}$ on the matrix-power residual,
+against the $10^{-9}$ used for detection. Candidates that fail
+refinement are reported as \texttt{unconfirmed} and treated as a
+bug rather than a result.  the exact period is confirmed by a direct
+matrix-power check $\|U^N - I\| < 10^{-10}$, and the confirmed
+revival is classified as trivial, Dukes-tabulated, or new.
+Trivial revivals are those at the degenerate parameter values
+$\rho \in \{0, 1\}$ or $\delta \in \{0, \pi\}$.
 
-\emph{2D revival search.} For a separable walk on a
-$k \times m$ torus, the single-step operator factorises as
-$U_{k \times m} = U_k \otimes U_m$. A full-state revival occurs
-at period $N$ when both factors revive at $N$. We use the same
-eigenvalue residual as in Eq.~\eqref{eq:eig-residual}, evaluated
-on the product spectrum.
-
-We search over all ordered pairs $(k, m)$ with
-$k, m \in \{2, 3, 4, 5, 6, 8, 10\}$ and $k \le m$, every pair of
-1D revival signatures with a common period $N$, and every
-multiple of that common period up to $N = 420$, the largest LCM
-of two periods in the 1D set. Each candidate is accepted only
-if the eigenvalue residual falls below $10^{-6}$.
-
-The search writes two data files. The first,
-\texttt{2d\_classification.csv}, is the reduced
-classification: one row per distinct parameter set
-$(k, m, \rho_x, \delta_x, \rho_y, \delta_y)$ recorded at its
-smallest revival period, containing 18{,}174 entries after the
-reduction pass. The second, \texttt{2d\_classification\_full.csv},
-records every revival period at which each parameter set revives,
-containing 111{,}741 entries. Both are available as supplementary
-data.
+\emph{2D enumeration (EXP033).} For a separable walk on a $k \times m$ torus,
+the single-step operator factorises as
+$U_{k \times m} = U_k \otimes U_m$. We enumerate all ordered pairs
+$(k, m)$ with $k, m \in \{2, 3, 4, 5, 6, 8, 10\}$ and $k \le m$,
+every pair of 1D signatures on those cycles, and every $N$ from $1$
+to $420$. For each pair, the operator is diagonalised once and the
+projective residual is evaluated at every $N$; the exact period is
+derived from the phase order via
+$N_{\text{exact}} = N_{\text{proj}} \cdot \mathrm{ord}(\phi)$,
+where $\mathrm{ord}(\phi)$ is the smallest $r$ with $\phi^r = 1$.
+Scanning every $N$ rather than only multiples of the factor LCM is
+necessary because the phase-cancellation case can revive exactly at
+a proper divisor of the LCM. Each canonical record is confirmed by a
+matrix-power check $\|U^N - I\| < 10^{-10}$ at its exact period.
 \section{\label{sec:results}Experimental Results}\par
-The search produces a classification of full-state revivals
-across the admissible cycle lengths and revival periods up to
-$N = 420$. The 1D stage finds revivals for exactly seven cycle
-lengths, $k \in \{2, 3, 4, 5, 6, 8, 10\}$, and the operator-level
-verification of all 174 signatures is reported in the Appendix.
+\emph{Demonstration.}
+Table~\ref{tab:k4-demo} shows the step-by-step amplitudes at the
+projective and exact revival steps for this $k = 4$ case. While
+the walker's position and spin return to the initial state
+at $N=6, N=12, N=18$ and $N=24$, an exact
+revival only occurs at $N = 24$ when the initial phase, $e^{i\phi} = 1$.  
+The revivals at $N = 6, 12, 18$ are called projective revivals as $e^{i\phi} \neq 1$
+at these steps.
+
+\emph{1D catalogue.}
+The catalogue contains $172$ signatures across the seven cycle
+lengths $k \in \{2, 3, 4, 5, 6, 8, 10\}$, transcribed from Dukes'
+tables together with the $k = 2$ correction. Every signature is
+verified at the operator level, and the verification pass is
+reported in Table~\ref{tab:1d-catalogue-exact} in the Appendix, 
+
+\emph{1D exhaustive grid search.}
+On a $1001 \times 360$ grid over $(\rho, \delta)$, for $k \le 16$
+and $N \le 60$, the exhaustive search finds no exact revival for
+$k \notin \{2, 3, 4, 5, 6, 8, 10\}$ outside the trivial revivals
+at $\rho \in \{0, 1\}$ and $\delta \in \{0, \pi\}$. Every candidate
+recorded by the grid search is confirmed by a matrix-power check at
+its exact period.  
+
+\emph{2D enumeration.}
 The 2D stage, built from the tensor factorisation, produces
-revivals on $28$ distinct tori, at $59$ distinct periods, and
-with a total of $18{,}174$ reduced parameter sets after
-collapsing harmonics. The full list of $(k, m, N, \rho_x,
-\delta_x, \rho_y, \delta_y)$ records, before deduplication,
-contains $111{,}741$ entries and is available as supplementary
-data. Table~\ref{tab:tori-summary} lists the $28$ tori with
-their record counts and period ranges.
+revivals on $28$ distinct tori, at $59$ distinct periods, and with
+a total of $18{,}174$ distinct parameter sets. Each parameter set is
+recorded once, at its smallest exact revival period; the
+classification is available as supplementary data.
+Table~\ref{tab:tori-summary} lists the $28$ tori with their record
+counts and period ranges.
+\par
+\input{../../docs/sep-coin-tori/components/tables/tab-k4-demo/tab-k4.demo}
 \par
 \begin{table*}[htbp]
 \centering
-\caption{Per-torus summary: distinct 2D revivals and range of revival
+\caption{Per-torus summary: reduced 2D revivals and range of revival
 periods. The table is split into three blocks; read the left block
 first, then the middle, then the right.}
 \label{tab:tori-summary}
@@ -601,25 +635,25 @@ Torus & Records & $N$ range & max $N$
   & Torus & Records & $N$ range & max $N$
   & Torus & Records & $N$ range & max $N$ \\
 \midrule
-$2\times2$   & 9    & $2$--$6$     & $6$
+$2\times2$   & 9    & $2$--$24$    & $24$
   & $3\times6$   & 1517 & $8$--$420$   & $420$
-  & $5\times10$  & 100  & $60$--$60$   & $60$ \\
-$2\times3$   & 123  & $8$--$84$    & $84$
+  & $5\times10$  & 100  & $60$--$120$  & $120$ \\
+$2\times3$   & 123  & $8$--$312$   & $312$
   & $3\times8$   & 164  & $24$--$312$  & $312$
   & $6\times6$   & 1369 & $8$--$420$   & $420$ \\
-$2\times4$   & 201  & $6$--$84$    & $84$
+$2\times4$   & 201  & $6$--$312$   & $312$
   & $3\times10$  & 340  & $60$--$420$  & $420$
   & $6\times8$   & 148  & $24$--$312$  & $312$ \\
-$2\times5$   & 30   & $60$--$60$   & $60$
+$2\times5$   & 30   & $60$--$120$  & $120$
   & $4\times4$   & 4489 & $6$--$420$   & $420$
   & $6\times10$  & 300  & $60$--$420$  & $420$ \\
-$2\times6$   & 111  & $8$--$84$    & $84$
+$2\times6$   & 111  & $8$--$312$   & $312$
   & $4\times5$   & 560  & $60$--$420$  & $420$
   & $8\times8$   & 16   & $24$--$24$   & $24$ \\
 $2\times8$   & 12   & $24$--$24$   & $24$
   & $4\times6$   & 2479 & $8$--$420$   & $420$
   & $8\times10$  & 40   & $120$--$120$ & $120$ \\
-$2\times10$  & 30   & $60$--$60$   & $60$
+$2\times10$  & 30   & $60$--$120$  & $120$
   & $4\times8$   & 268  & $24$--$312$  & $312$
   & $10\times10$ & 100  & $60$--$60$   & $60$ \\
 $3\times3$   & 1681 & $8$--$420$   & $420$
@@ -638,18 +672,22 @@ $3\times5$   & 340  & $60$--$420$  & $420$
 \end{tabular}
 \end{table*}
 \par
-Table~\ref{tab:torus-period-n60} shows the revival periods
-observed on each torus, for $N \le 60$. A bullet marks each
-$(k, m)$ and $N$ where at least one distinct revival exists.
-The distribution is highly uneven. The tori involving $k = 2$
-contribute the smallest families, because the $2$-cycle has
-only three signatures, all at $N_{\min} \le 6$. The largest
+\emph{Period structure.}
+Table~\ref{tab:torus-period-n60} shows the revival periods observed
+on each torus, for $N \le 60$ and $N = 120$. A bullet marks each $(k, m)$ and $N$
+where at least one distinct revival exists. The distribution is
+highly uneven. The tori with a $k = 2$ axis contribute the smallest
+families (Table~\ref{tab:tori-summary}): the $2$-cycle has only
+three signatures, at minimal periods $2$, $24$, and $24$, and the
+resulting torus families are correspondingly sparse. The largest
 families occur on the tori $4 \times 4$, $3 \times 4$, and
-$3 \times 3$, where the dense 1D spectra of the $3$- and
-$4$-cycles allow many parameter combinations to share a common
-period. The period $N = 60$ appears on the most tori, because
-the $5$- and $10$-cycles revive only at $60$ and any torus with
-a $5$ or $10$ axis therefore inherits that period.
+$3 \times 3$, where the dense 1D spectra of the $3$- and $4$-cycles
+allow many parameter combinations to share a common period. The
+period $N = 60$ appears on the most tori, because the $5$- and
+$10$-cycle signatures all have minimal period $60$, which dominates
+the LCM with any admissible axis period; every torus with a $5$ or
+$10$ axis therefore inherits that period.  The $5 \times 8$ and the
+$8 \times 8$ tori have their first revival at $N = 120$. 
 \par
 \begin{table*}[htbp]
 \centering
@@ -661,31 +699,31 @@ period.}
 \toprule
 Torus & $2$ & $6$ & $8$ & $10$ & $12$ & $14$ & $16$ & $18$ & $20$ & $22$ & $24$ & $26$ & $28$ & $30$ & $36$ & $40$ & $42$ & $48$ & $56$ & $60$ & $\cdots$ & $120$ \\
 \midrule
-$2\times2$  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
-$2\times3$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  \\
-$2\times4$  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  \\
-$2\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$2\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  \\
+$2\times2$  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  \\
+$2\times3$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
+$2\times4$  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
+$2\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$2\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
 $2\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  \\
-$2\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$3\times3$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$3\times4$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$3\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$3\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$3\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  \\
-$3\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$4\times4$  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$4\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$4\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$4\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  \\
-$4\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
+$2\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$3\times3$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$3\times4$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$3\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$3\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$3\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
+$3\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$4\times4$  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$4\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$4\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$4\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
+$4\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
 $5\times5$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$5\times6$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
+$5\times6$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
 $5\times8$  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
-$5\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
-$6\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  \\
-$6\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  \\
-$6\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
+$5\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
+$6\times6$  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+$6\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ \\
+$6\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ \\
 $8\times8$  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  \\
 $8\times10$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
 $10\times10$&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  \\
@@ -693,31 +731,37 @@ $10\times10$&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$
 \end{tabular}
 \end{table*}
 \par
-The $59$ revival periods range from $N = 2$ to $N = 420$.
-The largest counts occur at the highly composite periods:
-$N = 60$ with $2{,}616$ records, $N = 120$ with $1{,}522$,
-$N = 420$ with $1{,}076$, $N = 24$ with $655$, and $N = 30$
-with $703$. These values are the LCMs of many pairs of
+The $59$ revival periods range from $N = 2$ to the scan bound
+$N = 420$. The largest counts occur at the highly composite
+periods, notably $N = 60$ with $2{,}456$ records, $N = 120$ with
+$1{,}642$, $N = 420$ with $1{,}076$, $N = 24$ with $719$, and
+$N = 30$ with $581$. These values are the LCMs of many pairs of
 1D revival periods and therefore support many parameter
-combinations. The smallest periods ($N = 2$, $N = 6$,
-$N = 8$, $N = 10$) appear on only one or two tori each.
+combinations. The smallest periods are sparse: $N = 2$ appears
+only on the $2 \times 2$ torus at $\delta_x = \delta_y = 0$, while
+$N = 6, 8, 10$ appear on a handful of tori each.
 \par
+\emph{Phase selection.}
 Table~\ref{tab:delta-summary} records the distribution of the
-phase parameters across the $18{,}174$ distinct revivals.
-In 1D, the phase $\delta$ does not affect the revival period;
-in 2D it becomes a selection mechanism. Only $25.9\%$ of the
-classification has $\delta_x = \delta_y = 0$. A further
-$48.9\%$ has zero phase on exactly one axis, $5.0\%$ has
-$\delta_x = \delta_y \neq 0$, and the remaining $20.2\%$
-requires unequal non-zero phases on the two axes. All
-appearing phases are rational multiples of $\pi$ with
-denominators dividing twice the cycle length. The full 1D
-signature catalogue is given in
+phase parameters across the $18{,}174$ distinct revivals. In 1D,
+the phase $\delta$ selects which $(\rho, \delta)$ pairs lie in the
+catalogue but does not change the period at which a given $\rho$
+revives, once it is in the catalogue; the sole exception is the
+$k = 2$ case, where $\rho = 1/2$ revives at $N = 2$ for
+$\delta = 0$ and at $N = 24$ for $\delta = \pi/2$ or $3\pi/2$. In
+2D, by contrast, $\delta$ becomes a selection mechanism in its own
+right. Only $25.9\%$ of the classification has
+$\delta_x = \delta_y = 0$. A further $48.9\%$ has zero phase on
+exactly one axis (either $\delta_x = 0$ or $\delta_y = 0$, but not
+both), $5.0\%$ has $\delta_x = \delta_y \neq 0$, and the remaining
+$20.2\%$ has unequal non-zero phases on the two axes. All appearing
+phases are rational multiples of $\pi$ with denominators dividing
+$2k$. The full 1D signature catalogue is given in
 Table~\ref{tab:1d-catalogue-exact} in the Appendix.
 \par
 \begin{table}[htbp]
 \centering
-\caption{Distribution of phase parameters across the distinct 2D revivals.}
+\caption{Distribution of phase parameters across the reduced 2D revivals.}
 \label{tab:delta-summary}
 \begin{tabular}{lrr}
 \toprule
@@ -733,32 +777,40 @@ Total & 18174 & 100\% \\
 \end{tabular}
 \end{table}
 \section{\label{sec:discussion}Discussion}\par
-The classification has a clear shape. In 1D, exactly seven
-cycle lengths admit revivals, and they do so for a finite set
-of coin parameters. In 2D, this finite set spreads out through
-the tensor factorisation: $28$ tori revive, at $59$ distinct
-periods, with $18{,}174$ reduced parameter sets in total.
+\subsection{2D Classification}
+The results of the tensor factorisation show that:
+$28$ tori revive, at $59$ distinct
+periods, with $18{,}174$ distinct parameter sets in total.
 The distribution is highly uneven. The largest families
 occur on the tori $4 \times 4$, $3 \times 4$, and
-$3 \times 3$, which together account for more than half the
+$3 \times 3$, which together account for just under half the
 classification. These are the cycles with the densest 1D
-spectra: the $3$-cycle carries forty-one signatures and the
-$4$-cycle sixty-nine, so their pairwise tensor products
+spectra: the $3$-cycle carries 41 signatures and the
+$4$-cycle 69, so their tensor products
 generate many distinct parameter combinations. The tori
-involving $k = 2$ are the smallest, because the $2$-cycle
-carries only three signatures, all at $N_{\min} \le 6$.
+involving $k = 2$ are the sparsest, because the $2$-cycle
+carries only three signatures, at $N_{\min} \in \{2, 24, 24\}$.
+
+Note the 1D grid search stops at $N \le 60$, while the 2D
+classification extends to $N \le 420$. 
+The 2D enumeration is built from the catalogued 1D
+signatures, whose periods are all at most $60$, and a 2D period is
+either one of those periods or a combination of a pair of them.
+The 2D scan therefore inherits the 1D catalogue rather than
+re-searching 1D at larger $N$; periods above $60$ arise only as
+combinations of 1D revival periods.
 \par
-The period spectrum is equally uneven. Of the $59$ distinct
+The period spectrum is also scattered. Of the $59$ distinct
 periods, the majority are populated by only a handful of
-parameter sets. The peak periods are $N = 60$ with $2{,}616$
-records, $N = 120$ with $1{,}522$, $N = 420$ with $1{,}076$,
-$N = 30$ with $703$, and $N = 24$ with $655$. Each is highly
-composite and hence an LCM of many pairs of 1D revival
-periods, so a large number of 2D combinations share it. At
-the other extreme, the periods $N = 2$ and $N = 6$ are
-isolated on one or two tori.
+parameter sets. The peak periods are $N = 60$ with $2{,}456$
+distinct parameter sets, $N = 120$ with $1{,}642$, $N = 420$ with
+$1{,}076$, $N = 24$ with $719$, and $N = 30$ with $581$. Each is
+highly composite and hence an LCM of many pairs of 1D revival
+periods, so a large number of 2D combinations share it. At the
+other extreme, the periods $N = 2$ and $N = 6$ are isolated on
+one torus and on three tori respectively.
 \par
-The reflection parameters take several algebraic forms. The
+The reflection ($\rho_x, \rho_y$) parameters take several algebraic forms. The
 low-lying signatures are rational ($\nicefrac{1}{2}$,
 $\nicefrac{1}{3}$, $\nicefrac{1}{4}$, $\nicefrac{2}{3}$,
 $\nicefrac{3}{4}$) or quadratic surds of the form
@@ -769,15 +821,17 @@ $3$- and $6$-cycles; and the pentagonal family
 $(5 \pm \sqrt{5})/10$, associated with the $5$- and
 $10$-cycles. The higher-period signatures at $N \ge 14$ on
 the $3$- and $4$-cycles are trigonometric rather than
-quadratic --- for example $\tfrac{2}{3}(1 - \cos(2\pi/7))$ and
-$\tfrac{1}{2}(1 - \sin(3\pi/14))$ --- but they remain
-algebraic and their minimal polynomials are determined by
-the corresponding root-of-unity angle. The duality
-$\rho \leftrightarrow 1 - \rho$ holds without exception, so
+quadratic --- for example the $k=3$ value $0.251007$ at
+$N=14$ and the $k=4$ value $0.188255$ at $N=14$ --- but they
+remain algebraic and their minimal polynomials are determined
+by the corresponding root-of-unity angle. The duality
+$\rho \leftrightarrow 1 - \rho$ holds without exception
+(due to the definition of the coin), so
 each reflection parameter is paired with its complement
 elsewhere in the classification.
 \par
-The phase parameters are the dominant feature of the 2D
+The phase ($\delta_x, \delta_y$) parameters are also
+a notable feature of the 2D
 classification. In the 1D case, $\delta$ affects only the
 eigenvectors of $U_k$; the eigenvalues, and hence the revival
 period, depend solely on $\rho$. This simplicity does not
@@ -787,7 +841,7 @@ period-$N$ revival requires the phases of the two factors to
 be compatible. The phase parameters $\delta_x$ and $\delta_y$
 control which pairs of 1D eigenbases can be aligned. As
 Table~\ref{tab:delta-summary} shows, only $25.9\%$ of the
-reduced classification has $\delta_x = \delta_y = 0$, while
+ classification has $\delta_x = \delta_y = 0$, while
 $48.9\%$ has zero phase on exactly one axis, $5.0\%$ has
 $\delta_x = \delta_y \neq 0$, and the remaining $20.2\%$
 requires unequal non-zero phases on the two axes. All
@@ -797,27 +851,9 @@ parameters therefore act as a selection mechanism: the great
 majority of 2D revivals require a non-zero phase on at least
 one axis.
 \par
-\subsection{The $N = 60$ revival and the $5 \times 5$ torus}
-The longest period, $N = 60$, occurs on many tori, including
-the $5 \times 5$ torus. On the pentagonal tori --- those with
-a $5$ or $10$ axis --- it is the only period that appears,
-because the $5$- and $10$-cycles themselves revive only at
-$N = 60$. The reflection parameters at $N = 60$ are the
-golden-ratio surds $(5 - \sqrt{5})/10 \approx 0.2764$ and
-its complement $(5 + \sqrt{5})/10 \approx 0.7236$. The
-smaller value satisfies $\rho = 1/(\varphi + 2)$ for the
-golden ratio $\varphi = (1 + \sqrt{5})/2$. The phase
-parameters take values in $\{0, 2\pi/5, 4\pi/5\}$,
-reflecting the pentagonal symmetry of the underlying
-$5$-cycle. That the $5 \times 5$ torus, the smallest
-pentagonal torus, supports the longest period in the
-classification is a clear instance of an inverse relationship
-between torus size and maximum revival period in the
-separable-walk setting.
-\par
 \subsection{The $10 \times 10$ revival: a case study}
 The $10 \times 10$ torus is the largest torus admitting the
-longest period $N = 60$, and provides a clean illustration
+period $N = 60$, and provides a clean illustration
 of the revival mechanism. We take $\rho_x = \rho_y =
 (5 - \sqrt{5})/10 \approx 0.2764$ and $\delta_x =
 \delta_y = 0$.
@@ -838,9 +874,8 @@ of the revival mechanism. We take $\rho_x = \rho_y =
 \par
 Figure~\ref{fig:10x10-fidelity} tracks the fidelity of the
 walker against the initial state over eighty steps. The
-fidelity reaches its maximum at $N = 60$ with a value
-numerically indistinguishable from $1$; no other step in
-the range produces a full-state revival.
+fidelity reaches 1 at $N = 60$ 
+No other step in the range produces a full-state revival.
 Figure~\ref{fig:10x10-probability} shows the position
 probability distribution at ten snapshots. The walker
 starts localised at the origin, spreads outward over the
@@ -889,34 +924,56 @@ toroidal lattices, within the search bounds $k, m \in
 \{2, 3, 4, 5, 6, 8, 10\}$ and $N \le 420$. The 1D case is
 exhaustive on the search grid: exactly seven cycle lengths
 admit revivals, and the operator-level verification of all
-174 signatures is reported in the Appendix. The 2D case
+172 signatures is reported in Table~\ref{tab:1d-catalogue-exact}
+in the Appendix.  The 2D case
 factorises via the tensor product, giving $28$ tori, $59$
-periods, and $18{,}174$ reduced parameter sets. We state a
-conjecture that the 1D admissible set is complete beyond the
-search bound, and sketch a cyclotomic-field approach to the
-proof.
+periods, and $18{,}174$ distinct parameter sets. We demonstrated
+an example of exact versus projective revivals in 1D, reported
+a single correction to Dukes' 1D tables --- the $k = 2$,
+$\rho = 1/2$, $\delta \in \{\pi/2, 3\pi/2\}$ exact revival at
+$N = 24$, which lies in Dukes' seed family but was not
+tabulated --- and stated a conjecture that the 1D admissible set
+is complete beyond the search bound, sketching a
+cyclotomic-field approach to the proof.
 
-Three features stand out. First, two new 1D revivals --- at
-$k = 2$ and $k = 4$, both at $\delta = \pi/2$, $\rho = 1/2$,
-$N = 6$ --- are found beyond Dukes' tabulation. The two share
-a common eigenvalue structure at $\delta = \pi/2$, $\rho =
-1/2$: the eigenphases $\pi/12$ and $5\pi/12$ appear in the
-spectrum for every admissible $k$, and for $k = 2$ and $k = 4$
-the entire spectrum consists of these two values and their
-negatives, so that all eigenvalues return to a common phase at
-step 6. Second, the phase parameters $\delta_x$ and $\delta_y$
-are decisive in 2D: only $25.9\%$ of the reduced
-classification uses zero phases on both axes. Third, the
-longest period $N = 60$ occurs on many tori, including the
-$2 \times 2$ torus, whereas a classical random walk on a
-larger state space would be expected to recur more slowly.
-These results open new directions for quantum state routing
-and quantum memory architectures, and invite a proof of the
-stated conjecture.
+Summarising the 2D classification, two features stand out.
+First, the phase parameters $\delta_x$ and $\delta_y$ are a
+selection mechanism in 2D: only $25.9\%$ of the distinct
+classification has $\delta_x = \delta_y = 0$, $48.9\%$ has
+zero phase on exactly one axis, $5.0\%$ has
+$\delta_x = \delta_y \neq 0$, and the remaining $20.2\%$ has
+unequal non-zero phases on the two axes; thus $74.1\%$ of the
+classification requires a non-zero phase on at least one axis.
+Second, the period
+spectrum is dominated by the highly composite periods: $N = 120$
+occurs on $22$ tori, $N = 60$ on $25$, and $N = 24$ on $9$,
+while the sparsest periods ($N = 2$, $N = 42$) reach only one
+and three tori respectively. These results open directions for
+quantum state routing and quantum memory architectures, and
+invite a proof of the stated conjecture.
 \par
-\section*{Use of AI-assisted tools}
+\par\section*{Use of AI-assisted tools}
 \label{sec:ai-disclosure}
-The authors used DeepSeek (chat interface; model version not exposed at time of use) during the preparation of this manuscript, specifically for drafting and refining the proofs of Theorems 1 and 2, for the sketch of Conjecture~\ref{conj:no-other-k}, for the design and implementation of the Python analysis pipeline described in Sec. III, and for LaTeX formatting and bibliographic assistance. All mathematical derivations and all code produced with AI assistance were independently verified by the authors: the proofs by direct matrix exponentiation of the walk operators and comparison with the tabulated results of Dukes \cite{Dukes2014}; the code by operator-level residual checks, by reproduction of every 1D signature and every 2D record, and by numerical evaluation of the root-of-unity residual at the accepted revival parameters. The authors reviewed and edited all AI-assisted content and take full responsibility for the accuracy, originality, and integrity of the manuscript.
+The core mathematics and analysis programs for the 1D cycle and 2D
+torus classifications were developed by the authors. Once that
+foundation was trusted and verified, the authors used DeepSeek (chat interface;
+model version not exposed at time of use - Aug-Oct 2026) to refine and 
+augment the work into the final versions  of the  notebooks, \texttt{EXP032b.ipynb}, 
+\texttt{EXP033.ipynb}. 
+The AI assisted in three further areas: developing theorems: the cyclotomic-field
+sketch of Conjecture~\ref{conj:no-other-k}; migrating the numerical
+results from the notebook outputs into the LaTeX tables; and producing the 
+fidelity and distribution plots that accompany the notebook. 
+It was used to review drafts of the manuscript text for correctness.
+
+The AI-assisted output was checked at each stage. The notebook
+verifies every 1D signature and every 2D record against an
+operator-level eigenvalue residual, and the results were compared
+with the tabulated values of Dukes \cite{Dukes2014}. All tables were
+regenerated from the notebook. The authors reviewed the AI-assisted output
+and checked the tables against the classification data.
+They take full responsibility for the accuracy,
+originality, and integrity of the manuscript.
 \par
 \begin{acknowledgments}
 The authors are grateful for the support of colleagues, for the resources made available by the Atlantic Technological University, Sligo, and to the staff in the School of Mathematical and Statistical Sciences at the University of Galway.
@@ -926,7 +983,7 @@ We collect in this appendix the complete catalogue of 1D signatures.
 \par
 \clearpage
 \begin{longtable}{rrrrc}
-\caption{Canonical 1D full-state revivals, with reflection parameters in exact form.}\label{tab:1d-catalogue-exact} \\
+\caption{Full list of 1D full-state revivals, with reflection parameters in exact form.}\label{tab:1d-catalogue-exact} \\
 \toprule
 $k$ & $\rho$ & $\delta$ & $N_{\min}$ & source \\
 \midrule
@@ -938,8 +995,8 @@ $k$ & $\rho$ & $\delta$ & $N_{\min}$ & source \\
 \bottomrule
 \endfoot
 2 & $\nicefrac{1}{2}$ & $0$ & 2 & Dukes T2 (continuous) \\
-2 & $\nicefrac{1}{2}$ & $\pi/2$ & 6 & new \\
-2 & $\nicefrac{1}{2}$ & $3\pi/2$ & 6 & new \\
+2 & $\nicefrac{1}{2}$ & $\pi/2$ & 24 & new \\
+2 & $\nicefrac{1}{2}$ & $3\pi/2$ & 24 & new \\
 3 & $\nicefrac{2}{3}$ & $0$ & 8 & Dukes T3 \\
 3 & $\frac{5 - \sqrt{5}}{6}$ & $0$ & 10 & Dukes T3 \\
 3 & $\nicefrac{1}{3}$ & $0$ & 12 & Dukes T3 \\
@@ -1048,8 +1105,6 @@ $k$ & $\rho$ & $\delta$ & $N_{\min}$ & source \\
 4 & $0.165435$ & $0$ & 30 & Dukes T4 \\
 4 & $0.552264$ & $0$ & 30 & Dukes T4 \\
 4 & $0.989074$ & $0$ & 30 & Dukes T4 \\
-4 & $\nicefrac{1}{2}$ & $\pi/2$ & 6 & new \\
-4 & $\nicefrac{1}{2}$ & $3\pi/2$ & 6 & new \\
 5 & $\frac{5 - \sqrt{5}}{10}$ & $0$ & 60 & Dukes T5 \\
 5 & $\frac{5 + \sqrt{5}}{10}$ & $0$ & 60 & Dukes T5 \\
 5 & $\frac{5 - \sqrt{5}}{10}$ & $2\pi/5$ & 60 & Dukes T5 \\
