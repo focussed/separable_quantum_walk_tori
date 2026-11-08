@@ -8,6 +8,7 @@
 \usepackage{enumitem}
 \usepackage{nicefrac}
 \usepackage{longtable}
+\usepackage{float}
 \newcommand{\Nmax}{60}
 \newcommand{\Kmax}{16}
 
@@ -36,7 +37,7 @@
 
 \begin{document}
 
-\title{Complete Classification of Full State Revivals on Separable Quantum Walks on Tori}\author{Ian Craig}\email[Contact author: ]{ian.craig@atu.ie}\affiliation{Atlantic Technological University, Sligo, Ireland}\author{Michael McGetterick}\affiliation{University of Galway, Galway, Ireland}\date{\today}
+\title{Complete Classification of Full State Revivals on Separable Quantum Walks on Tori}\author{Ian Craig}\email[Contact author: ]{ian.craig@atu.ie}\affiliation{Atlantic Technological University, Sligo, Ireland}\author{Michael Mc Gettrick}\affiliation{University of Galway, Galway, Ireland}\date{\today}
 \begin{abstract}A quantum walk revives when it returns to its exact starting state
 after some number of steps. In this paper, we verify the work of
 Dukes on 1D cycles and extend it to toroidal lattices to find and classify
@@ -656,7 +657,6 @@ $e^{i\phi} \neq 1$. $\ddagger$ exact revival: $U^N = I$, i.e.\
 $e^{i\phi} = 1$.
 \end{minipage}
 \end{table}
-
 \par
 \begin{table*}[htbp]
 \centering
@@ -894,6 +894,20 @@ of the revival mechanism. We take $\rho_x = \rho_y =
 \delta_y = 0$.
 \par
 
+\begin{figure*}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{fig-10x10-probability.png}
+  \caption{Position probability distribution at ten snapshots between
+           step~1 and step~70, for the same parameters as
+           Fig.~\ref{fig:10x10-fidelity}. The walker starts localised at
+           the origin, spreads outward over the first thirty steps, and
+           refocuses to the origin at $N = 60$. The distribution at
+           step~60 matches the initial condition; the distributions at
+           intermediate steps do not.}
+  \label{fig:10x10-probability}
+\end{figure*}
+\par
+
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\linewidth]{fig-10x10-fidelity.png}
@@ -917,19 +931,7 @@ starts localised at the origin, spreads outward over the
 first thirty steps, and refocuses at $N = 60$.
 \par
 
-\begin{figure*}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{fig-10x10-probability.png}
-  \caption{Position probability distribution at ten snapshots between
-           step~1 and step~70, for the same parameters as
-           Fig.~\ref{fig:10x10-fidelity}. The walker starts localised at
-           the origin, spreads outward over the first thirty steps, and
-           refocuses to the origin at $N = 60$. The distribution at
-           step~60 matches the initial condition; the distributions at
-           intermediate steps do not.}
-  \label{fig:10x10-probability}
-\end{figure*}
-\par
+
 Figure~\ref{fig:10x10-spin} shows the four components of
 the spin distribution. The coin state returns to its initial
 values at both $N = 30$ and $N = 60$. The return at
